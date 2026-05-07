@@ -3,6 +3,13 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
+import Feed from './pages/Feed';
+
+// Komponent për të mbrojtur rrugët që duan kyçje
+const PrivateRoute = ({ children }: { children: JSX.Element }) => {
+  const token = localStorage.getItem('token');
+  return token ? children : <Navigate to="/login" replace />;
+};
 
 function App() {
   return (
@@ -12,7 +19,10 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path="/feed" element={<PrivateRoute><Feed /></PrivateRoute>} />
+        
+        {/* Nga rruga kryesore (/) çojmë te /feed ose /login varet nga rasti */}
+        <Route path="/" element={<Navigate to="/feed" replace />} />
       </Routes>
     </Router>
   );

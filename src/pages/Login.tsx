@@ -27,7 +27,7 @@ const Login: React.FC = () => {
       const { access_token } = response.data;
       localStorage.setItem('token', access_token);
       
-      navigate('/');
+      navigate('/feed');
     } catch (err: any) {
       setError(err.response?.data?.detail || 'Gabim gjatë logimit. Ju lutem provoni përsëri.');
     }
